@@ -1,0 +1,2 @@
+model_checkpoint_path: "c:\\Git\\tools\\model\\mnist\\tensorflow\\model_mnist_tensorflow.ckpt"
+all_model_checkpoint_paths: "c:\\Git\\tools\\model\\mnist\\tensorflow\\model_mnist_tensorflow.ckpt"

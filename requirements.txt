@@ -1,0 +1,11 @@
+tensorflow==1.12.3
+keras==2.2.5
+xgboost==1.2.0
+scikit-learn==0.23.2
+z3-solver==4.8.6
+pandas==1.1.2
+matplotlib==3.3.2
+numba==0.51.2
+mmdnn==0.3.1
+numpy==1.16.6
+h5py==2.8.0

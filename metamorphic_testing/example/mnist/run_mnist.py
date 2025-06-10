@@ -43,7 +43,7 @@ if __name__ == '__main__':
     conf_path = example_mnist_dir.joinpath('config.json')
     image_path = example_mnist_dir
 
-    sampling_num = 10
+    sampling_num = 20
     test_data_num = len(mnist_dataset.test.images)
     random.seed(3)
     sampling_index = random.sample(range(test_data_num), k=sampling_num)

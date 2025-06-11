@@ -4,8 +4,6 @@ import numpy as np
 from scipy import ndimage
 from scipy.ndimage import zoom
 
-# 전역 회전 카운터 (번갈아가며 회전하기 위함)
-_rotation_counter = 0
 
 def T(dset):
 
@@ -16,7 +14,7 @@ def T(dset):
         # 이미지 중심을 기준으로 축소
         original_shape = d.shape
 
-        scale_factor = 0.99  # 축소 비율
+        scale_factor = 0.975  # 축소 비율
         
         # 확대/축소 수행
         scaled = zoom(d, scale_factor, order=1)
@@ -48,7 +46,7 @@ def T(dset):
     # 메타모픽 관계: 숫자 이미지에 픽셀 블록을 반전해도 분류 결과는 변하지 않아야 함
     
     new_invert_dset = []
-    block_size = 1     # 반전할 블록의 크기
+    block_size = 2     # 반전할 블록의 크기
     
     for d in new_flip_dset:
         new_invert_d = d.copy()
@@ -72,24 +70,8 @@ def T(dset):
         
         new_invert_dset.append(new_invert_d)
 
-    # =============================================================================================
 
-    # 회전 변환 함수
-    # 메타모픽 관계: 숫자 이미지를 약간 회전시켜도 분류 결과는 변하지 않아야 함
-
-    global _rotation_counter
-    new_rotate_dset = []
-    
-    # 회전 방향을 번갈아가며 적용 (17도, -17도)
-    # 좌우반전 때문에 한 방향으로만 회전하면 패턴이 반복될 수 있음
-    rotate_angle = 17 if _rotation_counter % 2 == 0 else -17
-    _rotation_counter += 1
-    
-    for d in new_invert_dset:
-        new_rotate_d = ndimage.rotate(d, rotate_angle, reshape=False)
-        new_rotate_dset.append(new_rotate_d)
-
-    return np.array(new_rotate_dset)
+    return np.array(new_invert_dset)
 
 def E(source_y, follow_y):
     result = []
